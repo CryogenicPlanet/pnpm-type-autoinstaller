@@ -1,23 +1,13 @@
-import { installPackage } from './packageInstaller';
-import { checkTypes } from './typesChecker';
+import { checkTypes } from './checkTypes';
+import { installTypes } from './installTypes';
 
-export function initPlugin() {
-  const packageToInstall = process.argv[2];
+export default async function globalPnpmPlugin(
+  args: string[],
+  opts: { [key: string]: any }
+) {
+  const packageName = args[0];
 
-  if (!packageToInstall) {
-    console.error('No package specified for installation.');
-    process.exit(1);
+  if (await checkTypes(packageName)) {
+    await installTypes(packageName, opts);
   }
-
-  installPackage(packageToInstall)
-    .then(() => checkTypes(packageToInstall))
-    .then((typesExist) => {
-      if (typesExist) {
-        return installPackage(`@types/${packageToInstall}`, true);
-      }
-    })
-    .catch((error) => {
-      console.error('An error occurred during the installation process:', error);
-      process.exit(1);
-    });
 }

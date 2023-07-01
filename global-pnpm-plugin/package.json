@@ -1,20 +1,12 @@
 {
   "name": "global-pnpm-plugin",
   "version": "1.0.0",
-  "description": "A global pnpm plugin to automatically install @types/x as dev dependency when package x is installed",
+  "description": "A global pnpm plugin to automatically install TypeScript type definitions as dev dependencies.",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js"
   },
-  "keywords": [
-    "pnpm",
-    "plugin",
-    "typescript",
-    "types"
-  ],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "pnpm": "^6.23.6"
   },

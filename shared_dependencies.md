@@ -1,13 +1,13 @@
-1. Dependencies: All the files will share the same dependencies, which will be listed in the "package.json" file. These dependencies will include "pnpm", "typescript", and possibly others such as "@types/node" for TypeScript type definitions.
+1. "pnpm": This is the package manager that the plugin will hook into. It is used in all the files as they all interact with the pnpm flow.
 
-2. Exported Variables: The "index.ts" file will likely export a main function that is used to initialize the plugin. The "packageInstaller.ts" and "typesChecker.ts" files may export helper functions that are used by the main function.
+2. "checkTypes": This is a function that will be defined in "checkTypes.ts" and used in "index.ts". It checks if @types/x exists for a given package x.
 
-3. Data Schemas: There may be a shared data schema for the configuration of the plugin, which could be defined in a separate file and imported where needed.
+3. "installTypes": This is a function that will be defined in "installTypes.ts" and used in "index.ts". It installs @types/x as a dev dependency if it exists.
 
-4. Function Names: The "index.ts" file will likely contain a main function, such as "initPlugin". The "packageInstaller.ts" file may contain a function like "installPackage", and the "typesChecker.ts" file may contain a function like "checkTypes".
+4. "package.json": This file will contain the metadata of the project like the project's dependencies and scripts. It is shared as it will be used by pnpm to manage the project's dependencies.
 
-5. Message Names: If the plugin uses events or messages to communicate between different parts of the code, these message names would be shared between the files. For example, there might be a "packageInstalled" message that is sent from "packageInstaller.ts" to "index.ts".
+5. "tsconfig.json": This file will contain the configuration for the TypeScript compiler. It is shared as it will be used by the TypeScript compiler to compile the TypeScript code in the project.
 
-6. No DOM elements: As this is a Node.js project and not a front-end project, there will be no shared id names of DOM elements.
+6. "@types/x": This is the TypeScript type definitions for a package x. It is shared as it is checked and installed by the functions "checkTypes" and "installTypes".
 
-7. TypeScript Config: The "tsconfig.json" file will contain the configuration for the TypeScript compiler, which will be shared across all TypeScript files in the project.
+7. "x": This is the name of the package that the user wants to install. It is shared as it is used by the functions "checkTypes" and "installTypes" to check and install the TypeScript type definitions for the package.
